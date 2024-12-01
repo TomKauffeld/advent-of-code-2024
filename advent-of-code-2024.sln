@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day01", "AdventOfCode.Day01\AdventOfCode.Day01.csproj", "{D2E77E3A-C764-4096-B276-B1C8626CB2AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day01", "AdventOfCode.Day01\AdventOfCode.Day01.csproj", "{D2E77E3A-C764-4096-B276-B1C8626CB2AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventOfCode.Data", "AdventOfCode.Data", "{D44FBD1A-AB61-496B-8704-1C79B484B86C}"
 EndProject
@@ -12,7 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day01", "Day01", "{B639E4EA
 		AdventOfCode.Data\day01\input.txt = AdventOfCode.Data\day01\input.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Core", "AdventOfCode.Core\AdventOfCode.Core.csproj", "{BE7A7238-7B09-4A9D-91BC-DD90046E6602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Core", "AdventOfCode.Core\AdventOfCode.Core.csproj", "{BE7A7238-7B09-4A9D-91BC-DD90046E6602}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B84E23F7-AC49-4476-813B-0E3EEE50EF72}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.gitmodules = .gitmodules
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
