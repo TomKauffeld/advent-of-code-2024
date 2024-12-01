@@ -1,0 +1,4 @@
+[submodule "AdventOfCode.Data"]
+	path = AdventOfCode.Data
+	url = git@github.com:TomKauffeld/advent-of-code-2024-data.git
+	branch = main
