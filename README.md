@@ -23,7 +23,7 @@ My Solutions to the advent of code 2024.
 ## Solutions:
 * [Day 1](AdventOfCode.Day01/README.md): solved
 * [Day 2](AdventOfCode.Day02/README.md): solved
-* [Day 3](AdventOfCode.Day03/README.md): TBA
+* [Day 3](AdventOfCode.Day03/README.md): solved
 * [Day 4](AdventOfCode.Day04/README.md): TBA
 * [Day 5](AdventOfCode.Day05/README.md): TBA
 * [Day 6](AdventOfCode.Day06/README.md): TBA
