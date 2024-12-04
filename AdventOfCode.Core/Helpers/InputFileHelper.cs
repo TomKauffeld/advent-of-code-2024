@@ -79,6 +79,24 @@ namespace AdventOfCode.Core.Helpers
             return Tuple.Create(firstList, secondList);
         }
 
+        public static async Task<List<string>> GetLines(int day, bool test = false)
+        {
+            List<string> lines = [];
+
+            await using FileStream fileStream = GetInputFile(day, test);
+            using StreamReader reader = new(fileStream);
+
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                line = line.Trim();
+                if (line.Length < 1)
+                    continue;
+                lines.Add(line);
+            }
+
+            return lines;
+        }
+
         [GeneratedRegex("^(?<a>[0-9]+) +(?<b>[0-9]+)$")]
         private static partial Regex DualNumberRegex();
     }
