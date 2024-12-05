@@ -97,6 +97,38 @@ namespace AdventOfCode.Core.Helpers
             return lines;
         }
 
+        public static async Task<Tuple<List<List<int>>, List<List<int>>>> GetPipeToCommaSeparatedNumbers(int day, bool test = false)
+        {
+            List<List<int>> firstList = [];
+            List<List<int>> secondList = [];
+
+            await using (FileStream fileStream = GetInputFile(day, test))
+            {
+                using (StreamReader reader = new(fileStream))
+                {
+                    while (await reader.ReadLineAsync() is { } line)
+                    {
+                        line = line.Trim();
+                        if (line.Length < 1)
+                            break;
+                        string[] parts = line.Split('|');
+                        firstList.Add(parts.Select(int.Parse).ToList());
+                    }
+
+                    while (await reader.ReadLineAsync() is { } line)
+                    {
+                        line = line.Trim();
+                        if (line.Length < 1)
+                            break;
+                        string[] parts = line.Split(',');
+                        secondList.Add(parts.Select(int.Parse).ToList());
+                    }
+                }
+            }
+
+            return Tuple.Create(firstList, secondList);
+        }
+
         [GeneratedRegex("^(?<a>[0-9]+) +(?<b>[0-9]+)$")]
         private static partial Regex DualNumberRegex();
     }
