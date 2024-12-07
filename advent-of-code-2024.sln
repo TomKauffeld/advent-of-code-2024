@@ -53,6 +53,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day05", "Adven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day06", "AdventOfCode.Day06\AdventOfCode.Day06.csproj", "{38670952-6F4E-4B9C-8213-51171DC947F0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day06", "Day06", "{3E877045-C755-4CA9-9ED2-A8378B60CA66}"
+	ProjectSection(SolutionItems) = preProject
+		AdventOfCode.Data\day06\input.txt = AdventOfCode.Data\day06\input.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day07", "Day07", "{11052F0D-E771-481B-B771-8D88C967489D}"
+	ProjectSection(SolutionItems) = preProject
+		AdventOfCode.Data\day07\input.txt = AdventOfCode.Data\day07\input.txt
+		AdventOfCode.Data\day07\test.txt = AdventOfCode.Data\day07\test.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day07", "AdventOfCode.Day07\AdventOfCode.Day07.csproj", "{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +100,10 @@ Global
 		{38670952-6F4E-4B9C-8213-51171DC947F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38670952-6F4E-4B9C-8213-51171DC947F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38670952-6F4E-4B9C-8213-51171DC947F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +114,8 @@ Global
 		{2AFD8E39-418F-4930-ADFA-396CC02DD152} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{75063F2C-410E-45A8-9F9F-863DF7EB42FE} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{309FE90A-E3AC-455D-9FCC-744B9B35F8EE} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
+		{3E877045-C755-4CA9-9ED2-A8378B60CA66} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
+		{11052F0D-E771-481B-B771-8D88C967489D} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88F6C8E2-2954-4A04-8107-8D0767A52397}

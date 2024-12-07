@@ -129,6 +129,43 @@ namespace AdventOfCode.Core.Helpers
             return Tuple.Create(firstList, secondList);
         }
 
+
+        public static async Task<List<Tuple<long, List<long>>>> GetNumberToNumbersList(int day, bool test = false)
+        {
+            List<Tuple<long, List<long>>> lists = [];
+            await using FileStream fileStream = GetInputFile(day, test);
+            using StreamReader reader = new(fileStream);
+
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                try
+                {
+                    line = line.Trim();
+                    if (line.Length < 1)
+                        continue;
+                    string[] mainParts = line.Split(':');
+                    if (mainParts.Length != 2)
+                        throw new Exception($"Invalid line {line}");
+                    long target = long.Parse(mainParts[0]);
+                    List<long> numbers = mainParts[1]
+                        .Split(' ')
+                        .Select(s => s.Trim())
+                        .Where(s => s.Length > 0)
+                        .Select(long.Parse)
+                        .ToList();
+
+                    lists.Add(Tuple.Create(target, numbers));
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Error with line {line}", e);
+                }
+            }
+
+            return lists;
+        }
+
+
         [GeneratedRegex("^(?<a>[0-9]+) +(?<b>[0-9]+)$")]
         private static partial Regex DualNumberRegex();
     }
