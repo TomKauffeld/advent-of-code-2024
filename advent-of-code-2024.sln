@@ -49,7 +49,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day05", "Day05", "{309FE90A
 		AdventOfCode.Data\day05\test.txt = AdventOfCode.Data\day05\test.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day05", "AdventOfCode.Day05\AdventOfCode.Day05.csproj", "{4A61BBA7-FD2B-4299-99FC-4FED331F2A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day05", "AdventOfCode.Day05\AdventOfCode.Day05.csproj", "{4A61BBA7-FD2B-4299-99FC-4FED331F2A41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day06", "AdventOfCode.Day06\AdventOfCode.Day06.csproj", "{38670952-6F4E-4B9C-8213-51171DC947F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{4A61BBA7-FD2B-4299-99FC-4FED331F2A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A61BBA7-FD2B-4299-99FC-4FED331F2A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A61BBA7-FD2B-4299-99FC-4FED331F2A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38670952-6F4E-4B9C-8213-51171DC947F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38670952-6F4E-4B9C-8213-51171DC947F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38670952-6F4E-4B9C-8213-51171DC947F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38670952-6F4E-4B9C-8213-51171DC947F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
