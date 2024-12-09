@@ -66,13 +66,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day07", "Day07", "{11052F0D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day07", "AdventOfCode.Day07\AdventOfCode.Day07.csproj", "{91E751AC-A4D1-4583-B5E9-01EAD7EC59F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day08", "AdventOfCode.Day08\AdventOfCode.Day08.csproj", "{0DBDFFD0-1A2F-4DA8-8B4A-874F6D4D637E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day08", "AdventOfCode.Day08\AdventOfCode.Day08.csproj", "{0DBDFFD0-1A2F-4DA8-8B4A-874F6D4D637E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day08", "Day08", "{46FA41BD-FF22-4460-ADFC-057D0BC60E9A}"
 	ProjectSection(SolutionItems) = preProject
 		AdventOfCode.Data\day08\input.txt = AdventOfCode.Data\day08\input.txt
 		AdventOfCode.Data\day08\test.txt = AdventOfCode.Data\day08\test.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day09", "Day09", "{E4EA365D-B18D-4416-BAE5-CB03E4477783}"
+	ProjectSection(SolutionItems) = preProject
+		AdventOfCode.Data\day09\input.txt = AdventOfCode.Data\day09\input.txt
+		AdventOfCode.Data\day09\test.txt = AdventOfCode.Data\day09\test.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day09", "AdventOfCode.Day09\AdventOfCode.Day09.csproj", "{B9A2113D-7D02-408E-9877-00DE2FA926B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +124,10 @@ Global
 		{0DBDFFD0-1A2F-4DA8-8B4A-874F6D4D637E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DBDFFD0-1A2F-4DA8-8B4A-874F6D4D637E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DBDFFD0-1A2F-4DA8-8B4A-874F6D4D637E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9A2113D-7D02-408E-9877-00DE2FA926B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9A2113D-7D02-408E-9877-00DE2FA926B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9A2113D-7D02-408E-9877-00DE2FA926B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9A2113D-7D02-408E-9877-00DE2FA926B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +141,7 @@ Global
 		{3E877045-C755-4CA9-9ED2-A8378B60CA66} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{11052F0D-E771-481B-B771-8D88C967489D} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{46FA41BD-FF22-4460-ADFC-057D0BC60E9A} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
+		{E4EA365D-B18D-4416-BAE5-CB03E4477783} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88F6C8E2-2954-4A04-8107-8D0767A52397}
