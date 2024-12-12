@@ -166,6 +166,37 @@ namespace AdventOfCode.Core.Helpers
         }
 
 
+        public static async Task<Field<TCustomData>> GetField<TCustomData>(int day, bool test = false) where TCustomData : struct
+        {
+            int width = 0;
+            int height = 0;
+            List<char> data = [];
+            await using FileStream fileStream = GetInputFile(day, test);
+            using StreamReader reader = new(fileStream);
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                try
+                {
+                    line = line.Trim();
+                    if (line.Length < 1)
+                        continue;
+                    if (width == 0)
+                        width = line.Length;
+                    else if (width != line.Length)
+                        throw new Exception($"Expected width of {width} but found {line.Length}");
+                    data.AddRange(line);
+                    ++height;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Error with line {line}", e);
+                }
+            }
+
+            return new Field<TCustomData>(data.ToArray(), width, height);
+        }
+
+
         [GeneratedRegex("^(?<a>[0-9]+) +(?<b>[0-9]+)$")]
         private static partial Regex DualNumberRegex();
     }
