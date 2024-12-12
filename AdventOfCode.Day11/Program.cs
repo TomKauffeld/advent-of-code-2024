@@ -40,19 +40,6 @@ namespace AdventOfCode.Day11
             return results.ToList();
         }
 
-        private static ConcurrentBag<string> BlinkPart02(ConcurrentBag<string> data)
-        {
-            ConcurrentBag<string> results = [];
-
-            Parallel.ForEach(data, item =>
-            {
-                foreach (string r in BlinkPart01(item))
-                    results.Add(r);
-            });
-
-            return results;
-        }
-
         private static async Task Part01()
         {
             List<string> data = await GetInput();
@@ -69,20 +56,46 @@ namespace AdventOfCode.Day11
             Console.WriteLine($"Found {data.Count} stones after {blinks} blinks");
         }
 
-        private static async Task Part02()
+        private static long GetStonesAfter(string item, long depth, IDictionary<string, long> cache)
         {
-            ConcurrentBag<string> data = [.. await GetInput(true)];
-            const int blinks = 75;
-
-            Console.WriteLine($"0: {data.Count}");
-
-            for (int i = 0; i < blinks; ++i)
+            long result;
+            if (depth <= 0L)
+                result = 1L;
+            else if (cache.TryGetValue($"{depth}:{item}", out result))
+                return result;
+            else if (item == "0")
+                result = GetStonesAfter("1", depth - 1L, cache);
+            else if (item.Length % 2 == 0)
             {
-                data = BlinkPart02(data);
-                Console.WriteLine($"{i + 1}: {data.Count}");
+                result = GetStonesAfter(item[..(item.Length / 2)], depth - 1L, cache);
+                result += GetStonesAfter(item[(item.Length / 2)..].TrimStart('0').PadLeft(1, '0'), depth - 1L, cache);
+            }
+            else
+            {
+                long number = long.Parse(item);
+                result = GetStonesAfter($"{number * 2024}", depth - 1L, cache);
             }
 
-            Console.WriteLine($"Found {data.Count} stones after {blinks} blinks");
+            cache[$"{depth}:{item}"] = result;
+
+            return result;
+        }
+
+
+        private static async Task Part02()
+        {
+            List<string> data = await GetInput();
+            const long blinks = 75L;
+            ConcurrentDictionary<string, long> cache = [];
+
+            List<long> results = data.AsParallel().Select(
+                item =>
+                {
+                    long items = GetStonesAfter(item, blinks, cache);
+                    Console.WriteLine($"Found {items} stones after {blinks} blinks for {item}");
+                    return items;
+                }).ToList();
+            Console.WriteLine($"Found {results.Sum()} stones after {blinks} blinks");
         }
 
         private static async Task Main(string[] args)
