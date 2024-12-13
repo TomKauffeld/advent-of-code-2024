@@ -14,7 +14,7 @@ Once we have this list, we compact it just like in the example:
 
 When the list is compacted, create a new list where each item is equal to the index times the value at that index
 from the first list.  
-And lastly sum the values from the new list, and we have our awnser.  
+And lastly sum the values from the new list, and we have our answer.  
 
 (the code is written exactly as described, however the result is the same, but more optimised)
 

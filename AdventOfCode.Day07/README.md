@@ -25,4 +25,4 @@ and so we have `4 ^ (list.size - 1)` possible ways to arrange them.
 
 Once we have the list, we do the same thing as for part 1 again, but this time we take 2 bits every time.
 
-Add the possible solutions to a list, and perform a sum to get the final awnser.
+Add the possible solutions to a list, and perform a sum to get the final answer.

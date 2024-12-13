@@ -2,7 +2,7 @@
 
 ## Part 1
 The first way was to just brute force it by following the rules 25 times.  
-Then counting the amount of items in the list at the end to find the awnser.  
+Then counting the amount of items in the list at the end to find the answer.  
 
 ## Part 2
 For this part I've started using bruteforce. However the application was at more than 10GB of memory use

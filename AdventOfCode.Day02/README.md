@@ -14,4 +14,4 @@ By reusing the first solution, but adapted to return the index where the error h
 We can try to create 3 lists each with missing one of the 3 preceding indexes and check those lists
 as well.  
 If any of the 4 lists returns it's safe, we know it's safe, otherwise it's unsafe.  
-Using the same ``.Sum()`` we find to final awnser.
+Using the same ``.Sum()`` we find to final answer.

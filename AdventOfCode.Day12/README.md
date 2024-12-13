@@ -13,7 +13,7 @@ This was done using a multi step process:
 		- check the 4 regions around, and for each that is associated with a different region ID, add
 		  one to the perimeter of the current region ID.
 - Calculate for each region the price by multiplying the area and perimeter.
-- Sum the prices, and we have our awnser.
+- Sum the prices, and we have our answer.
 
 ## Part 2
 The idea is the same as the first one, except we don't calculate the perimeter, but the amount of sides:  
@@ -29,4 +29,4 @@ For the location on the right, we can check if the location on the top is the sa
 but the locaion on the top right is different.  
 When these extra checks returns true, we don't add it as it is an extension to an already existing fence.  
 Once the sides and areas are calculated, the price is calculated for each region by multiplying the sides by the area.  
-And we sum the prices to get our awnser.
+And we sum the prices to get our answer.

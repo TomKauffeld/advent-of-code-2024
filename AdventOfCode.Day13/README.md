@@ -7,7 +7,7 @@ The idea is to loop over every prize, and for each we check what happens if we p
 To find the amount of times we press the B button, we can divide the remainder of the Prize - x * A by B.
 If this is a solution we keep it with the cost.  
 Then we just have to take the smallest cost if it exists, and add it to our final sum which will be our
-awnser.
+answer.
 
 ## Part 2
 We have to do maths :'(  
@@ -75,4 +75,4 @@ t_y = A * a_y + B * b_y
 ```
 
 And we check if ``t_x == p_x`` and ``t_y == p_y``.  
-If this is the case, we can add to the final cost `A * 3 + B` and we have our awnser
+If this is the case, we can add to the final cost `A * 3 + B` and we have our answer
