@@ -6,49 +6,49 @@ namespace AdventOfCode.Day13
 {
     internal static partial class Program
     {
-        private static async Task<List<ButtonPrice>> GetInput(bool test = false)
+        private static async Task<List<ButtonPrize>> GetInput(bool test = false)
         {
             List<string> lines = await InputFileHelper.GetLines(13, test);
-            List<ButtonPrice> prices = [];
-            ButtonPrice price = new();
+            List<ButtonPrize> prizes = [];
+            ButtonPrize prize = new();
             foreach (string line in lines)
             {
                 Match buttonMatch = ButtonRegex().Match(line);
                 if (buttonMatch.Success)
                 {
                     if (buttonMatch.Groups["button"].Value == "A")
-                        price.ButtonA = (
+                        prize.ButtonA = (
                             long.Parse(buttonMatch.Groups["x"].Value),
                             long.Parse(buttonMatch.Groups["y"].Value)
                             );
                     else
-                        price.ButtonB = (
+                        prize.ButtonB = (
                             long.Parse(buttonMatch.Groups["x"].Value),
                             long.Parse(buttonMatch.Groups["y"].Value)
                         );
                 }
                 else
                 {
-                    Match priceMatch = PriceRegex().Match(line);
-                    if (priceMatch.Success)
+                    Match prizeMatch = PrizeRegex().Match(line);
+                    if (prizeMatch.Success)
                     {
-                        price.Price = (
-                            long.Parse(priceMatch.Groups["x"].Value),
-                            long.Parse(priceMatch.Groups["y"].Value)
+                        prize.Prize = (
+                            long.Parse(prizeMatch.Groups["x"].Value),
+                            long.Parse(prizeMatch.Groups["y"].Value)
                         );
-                        prices.Add(price);
-                        price = new ButtonPrice();
+                        prizes.Add(prize);
+                        prize = new ButtonPrize();
                     }
                 }
             }
-            return prices;
+            return prizes;
         }
 
 
         private static async Task Part01()
         {
             const long maxButtonPresses = 100L;
-            List<ButtonPrice> data = await GetInput();
+            List<ButtonPrize> data = await GetInput();
             ConcurrentBag<(long a, long b, long t)> results = [];
             Parallel.ForEach(data, item =>
             {
@@ -57,25 +57,25 @@ namespace AdventOfCode.Day13
                 {
                     long x = item.ButtonA.x * i;
                     long y = item.ButtonA.y * i;
-                    if (x > item.Price.x || y > item.Price.y)
+                    if (x > item.Prize.x || y > item.Prize.y)
                         break;
                     long bx, by;
                     if (item.ButtonB is { x: > 0, y: > 0 })
                     {
-                        bx = (item.Price.x - x) / item.ButtonB.x;
-                        by = (item.Price.y - y) / item.ButtonB.y;
+                        bx = (item.Prize.x - x) / item.ButtonB.x;
+                        by = (item.Prize.y - y) / item.ButtonB.y;
                     }
                     else if (item.ButtonB is { x: > 0 })
                     {
-                        bx = (item.Price.x - x) / item.ButtonB.x;
+                        bx = (item.Prize.x - x) / item.ButtonB.x;
                         by = bx;
                     }
                     else if (item.ButtonB is { y: > 0 })
                     {
-                        by = (item.Price.y - y) / item.ButtonB.y;
+                        by = (item.Prize.y - y) / item.ButtonB.y;
                         bx = by;
                     }
-                    else if (x == item.Price.x && y == item.Price.y)
+                    else if (x == item.Prize.x && y == item.Prize.y)
                     {
                         possibles.Add((i, 0));
                         continue;
@@ -89,7 +89,7 @@ namespace AdventOfCode.Day13
                         continue;
                     x += bx * item.ButtonB.x;
                     y += by * item.ButtonB.y;
-                    if (x == item.Price.x && y == item.Price.y)
+                    if (x == item.Prize.x && y == item.Prize.y)
                         possibles.Add((i, bx));
                 }
 
@@ -102,18 +102,18 @@ namespace AdventOfCode.Day13
                     results.Add(result);
                 }
             });
-            Console.WriteLine($"Found {results.Count} possible prices. Total cost {results.Sum(i => i.t)}");
+            Console.WriteLine($"Found {results.Count} possible prizes. Total cost {results.Sum(i => i.t)}");
         }
 
         private static async Task Part02()
         {
             const long offset = 10000000000000L;
-            List<ButtonPrice> data = await GetInput();
+            List<ButtonPrize> data = await GetInput();
             ConcurrentBag<(long a, long b, long t)> results = [];
-            foreach (ButtonPrice item in data)
+            foreach (ButtonPrize item in data)
             {
-                long px = item.Price.x + offset;
-                long py = item.Price.y + offset;
+                long px = item.Prize.x + offset;
+                long py = item.Prize.y + offset;
 
                 long ax = item.ButtonA.x;
                 long ay = item.ButtonA.y;
@@ -130,7 +130,7 @@ namespace AdventOfCode.Day13
                 if (tx == px && ty == py)
                     results.Add((a, b, a * 3 + b));
             }
-            Console.WriteLine($"Found {results.Count} possible prices. Total cost {results.Sum(i => i.t)}");
+            Console.WriteLine($"Found {results.Count} possible prizes. Total cost {results.Sum(i => i.t)}");
         }
 
         private static async Task Main(string[] args)
@@ -148,6 +148,6 @@ namespace AdventOfCode.Day13
 
 
         [GeneratedRegex("^Prize: X=(?<x>[0-9]+), Y=(?<y>[0-9]+)$")]
-        private static partial Regex PriceRegex();
+        private static partial Regex PrizeRegex();
     }
 }

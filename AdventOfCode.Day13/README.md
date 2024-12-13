@@ -2,16 +2,16 @@
 
 ## Part 1
 Started with brute force again...  
-The idea is to loop over every price, and for each we check what happens if we press x times the A button
+The idea is to loop over every prize, and for each we check what happens if we press x times the A button
 (with x between 0 and 100 inclusive).  
-To find the amount of times we press the B button, we can divide the remainder of the Price - x * A by B.
+To find the amount of times we press the B button, we can divide the remainder of the Prize - x * A by B.
 If this is a solution we keep it with the cost.  
 Then we just have to take the smallest cost if it exists, and add it to our final sum which will be our
 awnser.
 
 ## Part 2
 We have to do maths :'(  
-For each price we have a system with 2 equations and two unknown variables:
+For each prize we have a system with 2 equations and two unknown variables:
 
 ```
 A * a_x + B * b_x = p_x
