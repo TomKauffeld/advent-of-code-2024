@@ -9,7 +9,9 @@ namespace AdventOfCode.Day15
         {
             Nothing,
             Wall,
-            Box
+            Box,
+            LeftBox,
+            RightBox,
         }
 
         public int Width { get; }
@@ -72,7 +74,8 @@ namespace AdventOfCode.Day15
             return (tx, ty);
         }
 
-        public bool CanMove(int x, int y, Direction direction)
+
+        private bool CanMove(int x, int y, Direction direction, bool skip)
         {
             if (x < 0 || x >= Width)
                 throw new ArgumentOutOfRangeException(nameof(x));
@@ -84,18 +87,34 @@ namespace AdventOfCode.Day15
             if (tx < 0 || tx >= Width || ty < 0 || ty >= Height)
                 return false;
 
+            bool isY = direction is Direction.Up or Direction.Down;
+
             FieldItem item = GetItem(x, y);
 
-            return item switch
-            {
-                FieldItem.Wall => false,
-                FieldItem.Nothing => true,
-                FieldItem.Box => CanMove(tx, ty, direction),
-                _ => throw new Exception("Invalid item")
-            };
+            if (item == FieldItem.Wall)
+                return false;
+            if (item == FieldItem.Nothing)
+                return true;
+            if (item == FieldItem.Box)
+                return CanMove(tx, ty, direction, false);
+            if (!isY && item is FieldItem.LeftBox or FieldItem.RightBox)
+                return CanMove(tx, ty, direction, false);
+            if (isY && item == FieldItem.LeftBox)
+                return CanMove(tx, ty, direction, false) &&
+                       (skip || CanMove(x + 1, y, direction, true));
+            if (isY && item == FieldItem.RightBox)
+                return CanMove(tx, ty, direction, false) &&
+                       (skip || CanMove(x - 1, y, direction, true));
+            throw new Exception("Unknown item");
         }
 
-        public bool Move(int x, int y, Direction direction)
+        public bool CanMove(int x, int y, Direction direction)
+        {
+            return CanMove(x, y, direction, false);
+        }
+
+
+        private bool Move(int x, int y, Direction direction, bool skip)
         {
             (int tx, int ty) = GetNextLocation(x, y, direction);
 
@@ -110,12 +129,24 @@ namespace AdventOfCode.Day15
             if (item == FieldItem.Nothing)
                 return true;
 
-            if (!Move(tx, ty, direction))
+            if (!Move(tx, ty, direction, false))
                 return false;
+
+            bool isY = direction is Direction.Up or Direction.Down;
+
+            if (isY && item == FieldItem.LeftBox && !skip)
+                Move(x + 1, y, direction, true);
+            if (isY && item == FieldItem.RightBox && !skip)
+                Move(x - 1, y, direction, true);
 
             SetItem(tx, ty, item);
             SetItem(x, y, FieldItem.Nothing);
             return true;
+        }
+
+        public bool Move(int x, int y, Direction direction)
+        {
+            return Move(x, y, direction, false);
         }
 
         public override string ToString()
@@ -147,6 +178,12 @@ namespace AdventOfCode.Day15
                                 break;
                             case FieldItem.Nothing:
                                 builder.Append('.');
+                                break;
+                            case FieldItem.LeftBox:
+                                builder.Append('[');
+                                break;
+                            case FieldItem.RightBox:
+                                builder.Append(']');
                                 break;
                             default:
                                 builder.Append('?');

@@ -5,7 +5,7 @@ namespace AdventOfCode.Day15
 {
     internal static class Program
     {
-        private static async Task<(Field field, List<Direction> directions, (int x, int y) position)> GetInput(bool test = false)
+        private static async Task<(Field field, List<Direction> directions, (int x, int y) position)> GetInput01(bool test = false)
         {
             List<string> lines = await InputFileHelper.GetLines(15, test);
             List<Field.FieldItem> items = [];
@@ -74,7 +74,7 @@ namespace AdventOfCode.Day15
 
         private static async Task Part01()
         {
-            (Field field, List<Direction> directions, (int x, int y) position) = await GetInput();
+            (Field field, List<Direction> directions, (int x, int y) position) = await GetInput01();
 
             foreach (Direction direction in directions)
             {
@@ -101,10 +101,106 @@ namespace AdventOfCode.Day15
             Console.WriteLine($"Found GPS: {sum}");
         }
 
+        private static async Task<(Field field, List<Direction> directions, (int x, int y) position)> GetInput02(bool test = false)
+        {
+            List<string> lines = await InputFileHelper.GetLines(15, test);
+            List<Field.FieldItem> items = [];
+            List<Direction> directions = [];
+            int width = 0;
+            int height = 0;
+            (int x, int y) position = (0, 0);
+
+            for (int y = 0; y < lines.Count; ++y)
+            {
+                if (lines[y].StartsWith('#'))
+                {
+                    width = Math.Max(width, lines[y].Length * 2);
+                    height = y + 1;
+                    for (int x = 0; x < lines[y].Length; ++x)
+                    {
+                        switch (lines[y][x])
+                        {
+                            case '#':
+                                items.Add(Field.FieldItem.Wall);
+                                items.Add(Field.FieldItem.Wall);
+                                break;
+                            case '.':
+                                items.Add(Field.FieldItem.Nothing);
+                                items.Add(Field.FieldItem.Nothing);
+                                break;
+                            case 'O':
+                                items.Add(Field.FieldItem.LeftBox);
+                                items.Add(Field.FieldItem.RightBox);
+                                break;
+                            case '@':
+                                items.Add(Field.FieldItem.Nothing);
+                                items.Add(Field.FieldItem.Nothing);
+                                position = (x * 2, y);
+                                break;
+
+                        }
+                    }
+                }
+                else
+                {
+                    for (int x = 0; x < lines[y].Length; ++x)
+                    {
+                        switch (lines[y][x])
+                        {
+                            case '^':
+                                directions.Add(Direction.Up);
+                                break;
+                            case '>':
+                                directions.Add(Direction.Right);
+                                break;
+                            case 'v':
+                                directions.Add(Direction.Down);
+                                break;
+                            case '<':
+                                directions.Add(Direction.Left);
+                                break;
+
+                        }
+                    }
+                }
+            }
+
+            return (
+                new Field(width, height, items.ToArray()),
+                directions,
+                position
+            );
+        }
+
 
         private static async Task Part02()
         {
+            (Field field, List<Direction> directions, (int x, int y) position) = await GetInput02();
 
+            foreach (Direction direction in directions)
+            {
+                (int x, int y) next = Field.GetNextLocation(position.x, position.y, direction);
+                if (field.Move(next.x, next.y, direction))
+                    position = next;
+
+                //Console.WriteLine(field.ToString((position.x, position.y, '@')));
+            }
+
+            long sum = 0L;
+            for (int y = 0; y < field.Height; ++y)
+            {
+                for (int x = 0; x < field.Width; ++x)
+                {
+                    Field.FieldItem item = field.GetItem(x, y);
+                    if (item is Field.FieldItem.Box or Field.FieldItem.LeftBox)
+                    {
+                        long gps = y * 100L + x;
+                        sum += gps;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Found GPS: {sum}");
         }
 
         private static async Task Main(string[] args)
