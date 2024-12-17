@@ -1,32 +1,62 @@
-﻿namespace AdventOfCode.Core
+﻿using System.Collections.Concurrent;
+
+namespace AdventOfCode.Core
 {
     public class Graph<TValue> where TValue : class
     {
+        private readonly object _nodesLock = new();
         private readonly List<TValue> _nodes = [];
-        private readonly Dictionary<int, Dictionary<int, int>> _edges = [];
-        private readonly Dictionary<int, Dictionary<int, int>> _reverseEdges = [];
+        private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, int>> _edges = [];
+        private readonly ConcurrentDictionary<int, ConcurrentDictionary<int, int>> _reverseEdges = [];
 
+        public int CountNodes()
+        {
+            lock (_nodesLock)
+            {
+                return _nodes.Count;
+            }
+        }
 
         public int AddNode(TValue value)
         {
-            _nodes.Add(value);
-            return _nodes.Count - 1;
+            lock (_nodesLock)
+            {
+                _nodes.Add(value);
+                return _nodes.Count - 1;
+            }
         }
 
         public TValue? GetNode(int id)
         {
-            return _nodes.ElementAtOrDefault(id);
+            lock (_nodesLock)
+            {
+                return _nodes.ElementAtOrDefault(id);
+            }
+        }
+        public int? GetEdge(int from, int to)
+        {
+            if (_edges.TryGetValue(from, out ConcurrentDictionary<int, int>? edges) && edges.TryGetValue(to, out int value))
+                return value;
+
+            return null;
         }
 
         public void AddEdge(int from, int to, int cost = 1)
         {
-            if (!_edges.ContainsKey(from))
-                _edges.Add(from, new Dictionary<int, int>());
-            _edges[from][to] = cost;
-
-            if (!_reverseEdges.ContainsKey(to))
-                _reverseEdges.Add(to, new Dictionary<int, int>());
-            _reverseEdges[to][from] = cost;
+            _edges.AddOrUpdate(from,
+                _ => new ConcurrentDictionary<int, int>([new KeyValuePair<int, int>(to, cost)]),
+                (_, value) =>
+            {
+                value.AddOrUpdate(to, cost, (_, _) => cost);
+                return value;
+            });
+            _reverseEdges.AddOrUpdate(to,
+                _ => new ConcurrentDictionary<int, int>([new KeyValuePair<int, int>(from, cost)]),
+                (_, value) =>
+                {
+                    value.AddOrUpdate(from, cost, (_, _) => cost);
+                    return value;
+                });
         }
 
         public void AddBidirectionalEdge(int from, int to, int cost = 1)
@@ -37,28 +67,34 @@
 
         public List<(int id, int cost)> GetNeighborsOut(int id)
         {
-            return _edges
-                .GetValueOrDefault(id, new Dictionary<int, int>())
-                .Select(kv => (kv.Key, kv.Value)).ToList();
+            return _edges.TryGetValue(id, out ConcurrentDictionary<int, int>? list)
+                ? list.Select(kv => (kv.Key, kv.Value)).ToList()
+                : [];
         }
 
         public List<(int id, int cost)> GetNeighborsIn(int id)
         {
-            return _reverseEdges
-                .GetValueOrDefault(id, new Dictionary<int, int>())
-                .Select(kv => (kv.Key, kv.Value)).ToList();
+            return _reverseEdges.TryGetValue(id, out ConcurrentDictionary<int, int>? list)
+                ? list.Select(kv => (kv.Key, kv.Value)).ToList()
+                : [];
         }
 
         public List<(int id, TValue node)> GetNodesWhere(Func<TValue, bool> predicate)
         {
             List<(int, TValue)> nodes = [];
-            for (int i = 0; i < _nodes.Count; ++i)
+
+            lock (_nodesLock)
             {
-                bool use = predicate.Invoke(_nodes[i]);
-                if (use)
-                    nodes.Add((i, _nodes[i]));
+                for (int i = 0; i < _nodes.Count; ++i)
+                {
+                    bool use = predicate.Invoke(_nodes[i]);
+                    if (use)
+                        nodes.Add((i, _nodes[i]));
+                }
             }
+
             return nodes;
         }
+
     }
 }

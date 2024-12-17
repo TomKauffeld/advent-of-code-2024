@@ -1,8 +1,10 @@
-﻿namespace AdventOfCode.Core
+﻿using System.Collections.Concurrent;
+
+namespace AdventOfCode.Core
 {
     public class PositionalGraph<TValue> : Graph<PositionalNode<TValue>> where TValue : struct
     {
-        private readonly Dictionary<(int, int), int> _positions = [];
+        private readonly ConcurrentDictionary<(int, int), int> _positions = [];
 
         public int AddNode(int x, int y, TValue value)
         {
