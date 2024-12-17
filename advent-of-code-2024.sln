@@ -128,7 +128,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day15", "Day15", "{67F530F2
 		AdventOfCode.Data\day15\test.txt = AdventOfCode.Data\day15\test.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Day15", "AdventOfCode.Day15\AdventOfCode.Day15.csproj", "{220F6E3B-7B08-4939-A90B-AE1A5454F769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Day15", "AdventOfCode.Day15\AdventOfCode.Day15.csproj", "{220F6E3B-7B08-4939-A90B-AE1A5454F769}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day16", "Day16", "{FD7307C1-68FB-4925-8F80-626926A922DF}"
+	ProjectSection(SolutionItems) = preProject
+		AdventOfCode.Data\day16\input.txt = AdventOfCode.Data\day16\input.txt
+		AdventOfCode.Data\day16\test.txt = AdventOfCode.Data\day16\test.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day17", "Day17", "{8AA5F1D8-D588-47C2-95CC-C58DB4DDF624}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -220,6 +228,8 @@ Global
 		{A36B7602-330C-49A3-85F9-A9CF80F339CA} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{D3D9837F-9EFF-4C28-A61C-03A8C466094F} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 		{67F530F2-F331-47BD-A12F-1A7CBEDD494C} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
+		{FD7307C1-68FB-4925-8F80-626926A922DF} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
+		{8AA5F1D8-D588-47C2-95CC-C58DB4DDF624} = {D44FBD1A-AB61-496B-8704-1C79B484B86C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88F6C8E2-2954-4A04-8107-8D0767A52397}
