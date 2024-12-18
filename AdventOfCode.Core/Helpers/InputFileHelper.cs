@@ -24,7 +24,7 @@ namespace AdventOfCode.Core.Helpers
             return File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
 
-        public static async Task<List<List<int>>> GetSpaceSeparatedNumbers(int day, bool test = false)
+        public static async Task<List<List<int>>> GetSeparatedNumbers(int day, bool test = false, char separator = ' ')
         {
             List<List<int>> result = [];
 
@@ -36,7 +36,7 @@ namespace AdventOfCode.Core.Helpers
                 line = line.Trim();
                 if (line.Length < 1)
                     continue;
-                string[] parts = line.Split(' ');
+                string[] parts = line.Split(separator);
                 List<int> items = parts.Select(int.Parse).ToList();
                 result.Add(items);
             }

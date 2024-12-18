@@ -2,7 +2,7 @@
 {
     public class PositionalNode<TValue>
     {
-        public TValue Value { get; }
+        public TValue Value { get; set; }
         public int X { get; }
         public int Y { get; }
 

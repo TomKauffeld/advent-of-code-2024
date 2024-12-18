@@ -71,7 +71,6 @@ namespace AdventOfCode.Day17
         }
 
 
-
         private static async Task Main(string[] args)
         {
             Console.WriteLine("Part 01");

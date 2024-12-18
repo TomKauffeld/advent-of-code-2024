@@ -6,7 +6,7 @@ namespace AdventOfCode.Day02
     {
         private static async Task Part01()
         {
-            List<List<int>> data = await InputFileHelper.GetSpaceSeparatedNumbers(02);
+            List<List<int>> data = await InputFileHelper.GetSeparatedNumbers(02);
             int result = data.AsParallel().Sum(items =>
             {
                 bool increasing = items[1] > items[0];
@@ -55,7 +55,7 @@ namespace AdventOfCode.Day02
 
         private static async Task Part02()
         {
-            List<List<int>> data = await InputFileHelper.GetSpaceSeparatedNumbers(02);
+            List<List<int>> data = await InputFileHelper.GetSeparatedNumbers(02);
             int result = data.AsParallel().Sum(
                 items => IsSafeWithOneTolerance(items) ? 1 : 0
             );

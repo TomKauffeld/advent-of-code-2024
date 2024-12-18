@@ -22,6 +22,9 @@
                 }
             }
 
+            if (value == int.MaxValue)
+                return false;
+
             list.Remove(key);
 
             return true;

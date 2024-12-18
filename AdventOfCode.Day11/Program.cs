@@ -7,7 +7,7 @@ namespace AdventOfCode.Day11
     {
         private static async Task<List<string>> GetInput(bool test = false)
         {
-            return (await InputFileHelper.GetSpaceSeparatedNumbers(11, test))
+            return (await InputFileHelper.GetSeparatedNumbers(11, test))
                 .First()
                 .Select(x => x.ToString())
                 .ToList();

@@ -24,10 +24,25 @@ namespace AdventOfCode.Core
                 AddEdge(fromId.Value, toId.Value, cost);
         }
 
+
+        public void RemoveEdge((int x, int y) from, (int x, int y) to)
+        {
+            int? fromId = GetNodeId(from.x, from.y);
+            int? toId = GetNodeId(to.x, to.y);
+            if (fromId.HasValue && toId.HasValue)
+                RemoveEdge(fromId.Value, toId.Value);
+        }
+
         public void AddBidirectionalEdge((int x, int y) from, (int x, int y) to, int cost = 1)
         {
             AddEdge(from, to, cost);
             AddEdge(to, from, cost);
+        }
+
+        public void RemoveBidirectionalEdge((int x, int y) from, (int x, int y) to)
+        {
+            RemoveEdge(from, to);
+            RemoveEdge(to, from);
         }
 
         public int? GetNodeId(int x, int y)

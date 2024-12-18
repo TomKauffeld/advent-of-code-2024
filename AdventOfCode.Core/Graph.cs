@@ -59,10 +59,33 @@ namespace AdventOfCode.Core
                 });
         }
 
+        public void RemoveEdge(int from, int to)
+        {
+            if (_edges.TryGetValue(from, out ConcurrentDictionary<int, int>? value))
+            {
+                value.TryRemove(to, out _);
+                if (value.IsEmpty)
+                    _edges.TryRemove(from, out _);
+            }
+
+            if (_reverseEdges.TryGetValue(to, out value))
+            {
+                value.TryRemove(from, out _);
+                if (value.IsEmpty)
+                    _reverseEdges.TryRemove(to, out _);
+            }
+        }
+
         public void AddBidirectionalEdge(int from, int to, int cost = 1)
         {
             AddEdge(from, to, cost);
             AddEdge(to, from, cost);
+        }
+
+        public void RemoveBidirectionalEdge(int from, int to)
+        {
+            RemoveEdge(from, to);
+            RemoveEdge(to, from);
         }
 
         public List<(int id, int cost)> GetNeighborsOut(int id)
